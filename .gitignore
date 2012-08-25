@@ -1,0 +1,11 @@
+*.swp
+*.swo
+composer.lock
+phpunit.xml
+Tests/autoload.php
+nbproject
+catalog.xml
+Propel/om/*
+Propel/map/*
+
+vendor/*

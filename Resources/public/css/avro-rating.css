@@ -1,0 +1,16 @@
+.avro-star {
+    display: inline-block;
+    margin: 0 1px;
+    width: 22px;
+    height: 22px;
+    background-image: url('../img/star-off.png');
+}
+
+.avro-star-on {
+    background-repeat: no-repeat;
+    background-image: url('../img/star-on.png');
+}
+
+.avro-star-off {
+    background-image: url('../img/star-off.png');
+}

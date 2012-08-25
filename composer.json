@@ -1,0 +1,22 @@
+{
+    "name": "avro/rating-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony2 Star Rating Bundle",
+    "keywords": ["rate, rating, vote, voting, star"],
+    "homepage": "http://github.com/avro/AvroRatingBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joris de Wit",
+            "email": "joris.w.dewit@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "friendsofsymfony/user-bundle", "*"
+    },
+    "autoload": {
+        "psr-0": { "Avro\\RatingBundle": "" }
+    },
+    "target-dir": "Avro/RatingBundle"
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="avro_rating.rating_manager" class="Avro\RatingBundle\Doctrine\RatingManager">
+            <argument type="service" id="avro_rating.document_manager" />
+            <argument>Avro\RatingBundle\Document\Rating</argument>
+            <argument type="service" id="avro_rating.vote_manager" />
+        </service>
+
+        <service id="avro_rating.vote_manager" class="Avro\RatingBundle\Doctrine\VoteManager">
+            <argument type="service" id="avro_rating.document_manager" />
+            <argument>Avro\RatingBundle\Document\Vote</argument>
+        </service>
+
+        <service id="avro_rating.document_manager" factory-service="doctrine_mongodb" factory-method="getManager" class="Doctrine\ODM\MongoDB\DocumentManager" public="false">
+        </service>
+
+    </services>
+
+</container>
