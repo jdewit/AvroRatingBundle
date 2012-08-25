@@ -1,5 +1,7 @@
 AvroRatingBundle
 -----------------
+Add a star rating to any object. 
+
 
 Status
 ------
