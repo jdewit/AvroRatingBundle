@@ -23,7 +23,7 @@ Add AvroRatingBundle in your composer.json:
         "avro/rating-bundle": "*"
     }
 }
-
+```
 Now tell composer to download the bundle by running the command:
 
 ``` bash
@@ -117,7 +117,7 @@ class Product
     
     ...
 }
-
+```
 
 Render the rating in your view
 
