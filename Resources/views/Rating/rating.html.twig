@@ -1,0 +1,26 @@
+{% macro star(i, id, state, readOnly) %}
+    {% if readOnly %}
+        <span class="avro-star avro-star-{{ state }}" title="{{ i }} stars"></span>
+    {% else %}
+        <a href="{{ path('avro_rating_rating_addRating', { 'id': id, 'score': i }) }}" class="avro-star avro-star-{{ state }}" data-original="avro-star-{{ state }}" title="{{ i }} stars"></a>
+    {% endif %}
+{% endmacro %}
+
+{% block rating %}
+
+    {% if is_granted(options.min_role) %}
+        {% set readOnly = false %}
+    {% else %}
+        {% set readOnly = true %}
+    {% endif %}
+
+    <span id="avroStarContainer">
+        {% for i in 1 .. options.star_count %}
+            {% if i <= rating.score %}
+                {{ _self.star(i, rating.id, 'on', readOnly) }}
+            {% else %}
+                {{ _self.star(i, rating.id, 'off', readOnly) }}
+            {% endif %}
+        {% endfor %}
+    </span>
+{% endblock %}

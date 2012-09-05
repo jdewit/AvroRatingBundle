@@ -7,10 +7,9 @@
     <services>
         <service id="twig.extension.avro.extension" class="Avro\RatingBundle\Twig\Extension\RatingExtension" public="false">
             <tag name="twig.extension" />
-            <argument type="service" id="router" />
-            <argument type="service" id="security.context" />
-            <argument type="service" id="avro_rating.rating_manager" />
-            <argument>5</argument>
+            <argument type="service" id="twig" />
+            <argument>%avro_rating.star_count%</argument>
+            <argument>%avro_rating.min_role%</argument>
         </service>
     </services>
 </container>

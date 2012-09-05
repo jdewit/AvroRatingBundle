@@ -7,15 +7,20 @@ use FOS\UserBundle\Document\UserInterface;
 
 class RatingExtension extends \Twig_Extension
 {
-    protected $router;
-    protected $context;
-    protected $maxRating;
+    protected $environment;
+    protected $starCount;
+    protected $minRole;
 
-    public function __construct($router, $context, $ratingManager, $maxRating)
+    /**
+     * @param \Twig_Environment $environment
+     * @param int $starCount
+     * @param string $minRole
+     */
+    public function __construct(\Twig_Environment $environment, $starCount, $minRole)
     {
-        $this->router = $router;
-        $this->context = $context;
-        $this->maxRating = $maxRating;
+        $this->environment = $environment;
+        $this->starCount = $starCount;
+        $this->minRole = $minRole;
     }
 
     /**
@@ -35,46 +40,18 @@ class RatingExtension extends \Twig_Extension
      * @param string $string
      * @return int
      */
-    public function render(Rating $rating)
+    public function render(Rating $rating, array $options = array())
     {
-        $readOnly = true;
+        $template = 'AvroRatingBundle:Rating:rating.html.twig';
 
-        $user = $this->context->getToken()->getUser();
-        if (is_object($user)) {
-            $readOnly = false;
+        if (!$template instanceof \Twig_Template) {
+            $template = $this->environment->loadTemplate($template);
         }
 
-        $id = $rating->getId();
-        $score = $rating->getScore();
-        $html = '';
-        $starCount = 0;
-        if ($score > 0) {
-            while ($starCount < $score) {
-                if ($readOnly) {
-                    $html = sprintf('%s<span class="avro-star avro-star-on" title="'.($starCount + 1).' stars"></span>', $html);
-                } else {
-                    $uri = $this->router->generate('avro_rating_rating_addRating', array('id' => $id, 'score' => ($starCount + 1)));
-                    $html = sprintf('%s<a href="%s" class="avro-star avro-star-on" data-original="avro-star-on" title="'.($starCount + 1).' stars"></a>', $html, $uri);
-                }
+        $options['star_count'] = $this->starCount;
+        $options['min_role']= $this->minRole;
 
-                $starCount++;
-            }
-        }
-
-        while ($starCount < $this->maxRating) {
-            if ($readOnly) {
-                $rating = sprintf('%s<span class="avro-star avro-star-off" title="'.($starCount + 1).' stars"></span>', $html);
-            } else {
-                $uri = $this->router->generate('avro_rating_rating_addRating', array('id' => $id, 'score' => ($starCount + 1)));
-                $html = sprintf('%s<a href="%s" class="avro-star avro-star-off" data-original="avro-star-off" title="'.($starCount + 1).' stars"></a>', $html, $uri);
-            }
-
-            $starCount++;
-        }
-
-        $html = sprintf('<span id="avroStarContainer">%s</span>', $html);
-
-        return $html;
+        return $template->renderBlock('rating', array('rating' => $rating, 'options' => $options));
     }
 
     /**

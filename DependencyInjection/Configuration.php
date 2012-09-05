@@ -20,7 +20,16 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('avro_rating');
-       
+
+        $rootNode
+            ->children()
+                ->scalarNode('db_driver')->defaultValue('mongodb')->cannotBeEmpty()->end()
+                ->scalarNode('template')->defaultValue('AvroRatingBundle:Rating:rating.html.twig')->cannotBeEmpty()->end()
+                ->scalarNode('star_count')->defaultValue(5)->cannotBeEmpty()->end()
+                ->scalarNode('min_role')->defaultValue("ROLE_USER")->cannotBeEmpty()->end()
+            ->end()
+        ->end();
+
         return $treeBuilder;
     }
 }

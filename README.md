@@ -69,6 +69,20 @@ $ php app/console assets:install --symlink=true
 $ php app/console assetic:dump --watch --force 
 ```
 
+Configuration
+-------------
+No configuration is necessary but does come with some options
+that allow you to customize it
+
+``` yaml
+avro_rating:
+    template: 'AvroRatingBundle:Rating:rating.html.twig
+    star_count: 5
+    min_role: ROLE_USER
+```
+
+
+
 Usage
 -----
 

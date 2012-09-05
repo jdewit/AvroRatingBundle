@@ -1,3 +1,6 @@
+#avroStarContainer {
+    display: inline-block;
+}
 .avro-star {
     display: inline-block;
     margin: 0 1px;
@@ -13,4 +16,4 @@
 
 .avro-star-off {
     background-image: url('../img/star-off.png');
-}
+}  
